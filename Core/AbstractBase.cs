@@ -17,7 +17,7 @@ namespace IPG_OOP_Project.Core
 
         public abstract string BriefDescription { get; }
 
-        public virtual void ShowProductDetails()
+        public virtual void DisplayDetails()
         {
             Console.WriteLine($"Product ID: {ProductIdentifier}");
             Console.WriteLine($"Product Name: {NameOfProduct}");
