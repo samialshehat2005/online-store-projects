@@ -1,6 +1,6 @@
 using System;
 
-namespace IPG_OOP_Project.Core
+namespace IPG_OOP_Project.Services
 {
     public static class DataValidator
     {
