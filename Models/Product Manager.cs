@@ -1,7 +1,8 @@
 using System;
+using IPG_OOP_Project.Core;
 using System.Collections.Generic;
 
-namespace IPG_OOP_Project.Core
+namespace IPG_OOP_Project.Models
 {
     public class ProductManager
     {
@@ -21,13 +22,13 @@ namespace IPG_OOP_Project.Core
             }
         }
 
-        public void DisplayAllItems()
+        public void ShowAllItems()
         {
             Console.WriteLine("--- All Managed Items ---");
             foreach (AbstractBase item in items)
             {
-                // تطبيق تعدد الأشكال (Polymorphism)
-                // يتم استدعاء DisplayDetails الخاص بالفئة المشتقة (Book, ElectronicDevice, ServiceSubscription)
+
+
                 item.DisplayDetails(); 
                 Console.WriteLine("-------------------------");
             }
