@@ -1,9 +1,9 @@
 using System;
-    using IPG_OOP_project.core;
-    using IPG_OOP_project.Events;
-namespace IPG_OOP_project.Models
+using IPG_OOP_Project.Core;
+using IPG_OOP_Project.Events;
+namespace IPG_OOP_Project.Models
 {
-    public class Book : AbstactBase
+    public class Book : AbstractBase
     {
         private string _author;
         private string _isbn;
@@ -21,7 +21,7 @@ namespace IPG_OOP_project.Models
         }
         public int QuantityInStock { get { return _quantityInStock; }
             set { _quantityInStock = value;
-                CheckStockLevel(); }
+                StockLevel(); }
         }
         public Book(string id, string name, decimal price, string author, string isbn, int stock) : base(id, name, price)
         {
@@ -33,13 +33,13 @@ namespace IPG_OOP_project.Models
         {
             get { return $"Book:{NameOfProduct}"; }
         }
-        private void CheckStockLevel()
+        private void StockLevel()
         {
             if (_quantityInStock<10)
             { if (LowStock != null)
                 {
                     LowStock(this, new LowStockEventArgs
-                    { ProductName = NameOfProduct, CheckStockLevel = _quantityInStock });
+                    { ProductName = NameOfProduct, StockLevel = _quantityInStock });
                 }
             }
         }
