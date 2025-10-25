@@ -1,29 +1,28 @@
 using System;
+using IPG_OOP_Project.Core;
 
-namespace IPG_OOP_Project.Core
+namespace IPG_OOP_Project.Models
 {
     public delegate void StatusChangeHandler(string deviceName, bool newStatus);
 
-    public class ElectronicDevice : AbstractBase 
+    public class ElectronicDevice : AbstractBase
     {
-        private string name;
         private string model;
         private bool ison;
         private double power;
 
         public event StatusChangeHandler OnStatusChanged;
 
-        public ElectronicDevice(string deviceName, string modelNumber, double powerConsumptionWatts)
+        public ElectronicDevice(string id, string name, decimal price, string modelNumber, double powerConsumptionWatts) : base(id, name, price)
         {
-            name = deviceName;
-            model = modelNumber;
-            ison = false; 
-            power = powerConsumptionWatts;
+            this.model = modelNumber;
+            this.power = powerConsumptionWatts;
+            this.ison = false;
         }
 
-        public string DeviceName
+        public override string BriefDescription
         {
-            get { return name; }
+            get { return $"Electronic Device: {NameOfProduct}"; }
         }
 
         public bool IsPoweredOn
@@ -36,12 +35,12 @@ namespace IPG_OOP_Project.Core
             if (!ison)
             {
                 ison = true;
-                Console.WriteLine(name + " is turning ON.");
-                OnStatusChanged?.Invoke(name, ison);
+                Console.WriteLine(NameOfProduct + " is turning ON.");
+                OnStatusChanged?.Invoke(NameOfProduct, ison);
             }
             else
             {
-                Console.WriteLine(name + " is already ON.");
+                Console.WriteLine(NameOfProduct + " is already ON.");
             }
         }
 
@@ -50,22 +49,21 @@ namespace IPG_OOP_Project.Core
             if (ison)
             {
                 ison = false;
-                Console.WriteLine(name + " is turning OFF.");
-                OnStatusChanged?.Invoke(name, ison);
+                Console.WriteLine(NameOfProduct + " is turning OFF.");
+                OnStatusChanged?.Invoke(NameOfProduct, ison);
             }
             else
             {
-                Console.WriteLine(name + " is already OFF.");
+                Console.WriteLine(NameOfProduct + " is already OFF.");
             }
         }
 
         public override void DisplayDetails()
         {
-            Console.WriteLine("Details:");
-            Console.WriteLine("Name: " + name);
+            base.DisplayDetails();
             Console.WriteLine("Model: " + model);
-            Console.WriteLine("Status: " + (ison ? "ON" : "OFF"));
             Console.WriteLine("Power: " + power + "W");
+            Console.WriteLine("Status: " + (ison ? "ON" : "OFF"));
         }
     }
 }
