@@ -1,6 +1,8 @@
 using System;
+using IPG_OOP_Project.Core;
+using IPG_OOP_Project.Services;
 
-namespace IPG_OOP_Project.Core
+namespace IPG_OOP_Project.Models
 {
     public class ServiceSubscription : AbstractBase
     {
@@ -11,7 +13,7 @@ namespace IPG_OOP_Project.Core
 
         public static double TotalRevenue { get; private set; } = 0;
 
-        public ServiceSubscription(string name, DateTime start, int duration, double cost)
+        public ServiceSubscription(string id, string name, decimal price, DateTime start, int duration, double cost) : base(id, name, price)
         {
             if (!DataValidator.IsValidString(name) || !DataValidator.IsPositive(duration) || !DataValidator.IsPositive(cost))
             {
@@ -38,6 +40,11 @@ namespace IPG_OOP_Project.Core
         public bool IsActive
         {
             get { return EndDate > DateTime.Now; }
+        }
+
+        public override string BriefDescription
+        {
+            get { return $"Subscription: {serviceName}"; }
         }
 
         public override void DisplayDetails()
