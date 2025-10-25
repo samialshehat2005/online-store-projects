@@ -8,6 +8,6 @@ namespace IPG_OOP_Project.Core
         string NameOfProduct { get; }
         decimal CurrentPrice { get; }
         string BriefDescription { get; }
-        void ShowProductDetails();
+        void DisplayDetails();
     }
 }
